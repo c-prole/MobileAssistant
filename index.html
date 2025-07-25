@@ -1,81 +1,21 @@
-<!DOCTYPE html>
+5<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>My Assistant Console</title>
+  <meta charset="UTF-8">
+    <title>GPT Chat Assistant</title>
+      <link rel="stylesheet" href="style.css">
+      </head>
+      <body>
+        <h1>Virtual GPT Assistant</h1>
+          <p>Type something and get a response from GPT!</p>
 
-        <style>
-            body {
-                  background-color: #000;
-                        color: #0f0;
-                              font-family: monospace;
-                                    margin: 0;
-                                          padding: 2em;
-                                              }
+            <div id="chat-box" class="chat-box"></div>
 
-                                                  h1 {
-                                                        color: #0f0;
-                                                              margin-bottom: 1em;
-                                                                  }
+              <form id="chat-form">
+                  <input type="text" id="user-input" placeholder="Say something..." required />
+                      <button type="submit">Send</button>
+                        </form>
 
-                                                                      .console-output {
-                                                                            background-color: #111;
-                                                                                  color: #0f0;
-                                                                                        padding: 1em;
-                                                                                              height: 300px;
-                                                                                                    overflow-y: auto;
-                                                                                                          font-family: monospace;
-                                                                                                                border: 1px solid #0f0;
-                                                                                                                      margin-bottom: 10px;
-                                                                                                                          }
-
-                                                                                                                              .console-input {
-                                                                                                                                    width: 100%;
-                                                                                                                                          padding: 0.5em;
-                                                                                                                                                font-family: monospace;
-                                                                                                                                                      background-color: #000;
-                                                                                                                                                            color: #0f0;
-                                                                                                                                                                  border: 1px solid #0f0;
-                                                                                                                                                                      }
-                                                                                                                                                                        </style>
-                                                                                                                                                                        </head>
-
-                                                                                                                                                                        <body>
-                                                                                                                                                                          <h1>Assistant Console</h1>
-<div class="assistant-container">
-          <input type="text" id="userInput" placeholder="Ask me something..." />
-              <button onclick="handleInput()">Submit</button>
-                  <div id="response"></div>
-                    </div>
-                                                                                                                                                                            <div class="console-output" id="output">
-                                                                                                                                                                                Welcome to your assistant console.
-                                                                                                                                                                                  </div>
-
-                                                                                                                                                                                    <input
-                                                                                                                                                                                        class="console-input"
-                                                                                                                                                                                            id="input"
-                                                                                                                                                                                                type="text"
-                                                                                                                                                                                                    placeholder="Type a command..."
-                                                                                                                                                                                                      />
-                                                                                                                                                                                                      <div style="margin-top: 20px;">
-                                                                                                                                                                                                              <input type="text" id="userInput" placeholder="Ask your assistant..." style="width: 60%;">
-                                                                                                                                                                                                                <button onclick="handleUserInput()">Ask</button>
-                                                                                                                                                                                                                </div>
-
-                                                                                                                                                                                                                <p id="gptResponse"></p>
-
-                                                                                                                                                                                                                <script>
-                                                                                                                                                                                                                  async function handleUserInput() {
-                                                                                                                                                                                                                      const userInput = document.getElementById("userInput").value;
-                                                                                                                                                                                                                          const response = await callGPT(userInput);
-                                                                                                                                                                                                                              document.getElementById("gptResponse").innerText = response;
-                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                </script>
-                                                                                                                                                                                                      <script src="secrets.js"></script>
-                                                                                                                                                                                                      <script src="gpt.js"></script>
-                                                                                                                                                                                                      <script src="script.js"></script>
-                                                                                                                                                                                                      <script type="module" src="secret.js"></script>
-                                                                                                                                                                                                      </body>
-                                                                                                                                                                                                      </html>
-                                                                                                                                                                                                      
+                          <script type="module" src="script.js"></script>
+                          </body>
+                          </html>
