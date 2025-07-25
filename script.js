@@ -45,4 +45,8 @@ form.addEventListener("submit", async (e) => {
                                                                                                                               msg.innerHTML = `<strong>${sender}:</strong> ${message}`;
                                                                                                                                 chatBox.appendChild(msg);
                                                                                                                                   chatBox.scrollTop = chatBox.scrollHeight;
+                                                                                                                                  form.addEventListener("submit", (e) => {
+                                                                                                                                      e.preventDefault();
+                                                                                                                                        console.log("Form submitted");
+                                                                                                                                        });
                                                                                                                                   }
