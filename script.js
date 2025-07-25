@@ -1,48 +1,48 @@
-// Import the secret API key from the separate file
 import { OPENAI_API_KEY } from './secret.js';
 
-// Get DOM elements
-const chatForm = document.getElementById('chat-form');
-const chatBox = document.getElementById('chat-box');
+const form = document.getElementById("chat-form");
+const input = document.getElementById("user-input");
+const chatBox = document.getElementById("chat-box");
 
-// Event listener for form submission
-chatForm.addEventListener('submit', async (e) => {
-  e.preventDefault(); // Prevent form from refreshing the page
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const userInput = document.getElementById('user-input').value;
+    const userMessage = input.value.trim();
+      if (!userMessage) return;
 
-      // Display user's message in the chat box
-        chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+        // Display user message
+          appendMessage("You", userMessage);
+            input.value = "";
 
-          try {
-              // Send request to OpenAI API
-                  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                        method: 'POST',
+              try {
+                  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                        method: "POST",
                               headers: {
-                                      'Content-Type': 'application/json',
-                                              'Authorization': `Bearer ${OPENAI_API_KEY}`
+                                      "Content-Type": "application/json",
+                                              Authorization: `Bearer ${OPENAI_API_KEY}`,
                                                     },
                                                           body: JSON.stringify({
-                                                                  model: 'gpt-3.5-turbo',
-                                                                          messages: [
-                                                                                    { role: 'system', content: 'You are a helpful assistant.' },
-                                                                                              { role: 'user', content: userInput }
-                                                                                                      ],
-                                                                                                              temperature: 0.7
-                                                                                                                    })
-                                                                                                                        });
+                                                                  model: "gpt-3.5-turbo",
+                                                                          messages: [{ role: "user", content: userMessage }],
+                                                                                }),
+                                                                                    });
 
-                                                                                                                            const data = await response.json();
+                                                                                        if (!response.ok) {
+                                                                                              throw new Error(`OpenAI API error: ${response.status}`);
+                                                                                                  }
 
-                                                                                                                                // Extract and display assistant's reply
-                                                                                                                                    const reply = data.choices?.[0]?.message?.content || '[No response]';
-                                                                                                                                        chatBox.innerHTML += `<p><strong>Assistant:</strong> ${reply}</p>`;
+                                                                                                      const data = await response.json();
+                                                                                                          const reply = data.choices[0].message.content.trim();
+                                                                                                              appendMessage("GPT", reply);
+                                                                                                                } catch (error) {
+                                                                                                                    console.error("Error:", error);
+                                                                                                                        appendMessage("GPT", "Sorry, something went wrong.");
+                                                                                                                          }
+                                                                                                                          });
 
-                                                                                                                                          } catch (error) {
-                                                                                                                                              // Handle errors and display in chat box
-                                                                                                                                                  chatBox.innerHTML += `<p><strong>Assistant:</strong> Error: ${error.message}</p>`;
-                                                                                                                                                    }
-
-                                                                                                                                                      // Clear the input box
-                                                                                                                                                        chatForm.reset();
-                                                                                                                                                        });
+                                                                                                                          function appendMessage(sender, message) {
+                                                                                                                            const msg = document.createElement("p");
+                                                                                                                              msg.innerHTML = `<strong>${sender}:</strong> ${message}`;
+                                                                                                                                chatBox.appendChild(msg);
+                                                                                                                                  chatBox.scrollTop = chatBox.scrollHeight;
+                                                                                                                                  }
