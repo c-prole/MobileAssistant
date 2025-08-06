@@ -13,7 +13,6 @@ form.addEventListener("submit", async (e) => {
         // Display user message
           appendMessage("You", userMessage);
             input.value = "";
-
               try {
                   const response = await fetch("https://api.openai.com/v1/chat/completions", {
                         method: "POST",
@@ -26,11 +25,9 @@ form.addEventListener("submit", async (e) => {
                                                                           messages: [{ role: "user", content: userMessage }],
                                                                                 }),
                                                                                     });
-
                                                                                         if (!response.ok) {
                                                                                               throw new Error(`OpenAI API error: ${response.status}`);
                                                                                                   }
-
                                                                                                       const data = await response.json();
                                                                                                           const reply = data.choices[0].message.content.trim();
                                                                                                               appendMessage("GPT", reply);
