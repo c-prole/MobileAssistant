@@ -23,7 +23,7 @@ chatForm.addEventListener("submit", async (e) => {
 
   try {
     // Call backend server
-    const res = await fetch("https://mobileassistant.onrender.com", {
+    const res = await fetch("https://mobileassistant.onrender.com/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ messages: [{ role: "user", content: message }] })
