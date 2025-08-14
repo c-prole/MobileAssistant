@@ -21,6 +21,20 @@ function appendMessage(sender, message) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+async function typeGPTMessage(message) {
+  const messageEl = document.createElement("div");
+  messageEl.classList.add("chat-message", "gpt-message");
+  chatBox.appendChild(messageEl);
+  
+  for (let i = 0; i < message.length; i++) {
+    messageEl.textContent += message[i];
+    // Add a tiny orange cursor flicker
+    messageEl.textContent += (i % 3 === 0) ? "|" : "";
+    await new Promise(r => setTimeout(r, 15));
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+}
+
 // Handle form submit
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();

@@ -19,40 +19,90 @@ h1 {
   height: 400px;
   overflow-y: auto;
   margin-bottom: 10px;
+  scroll-behavior: smooth;
 }
 
+/* Base message styling */
 .chat-message {
   padding: 5px 10px;
   margin: 5px 0;
   border-radius: 5px;
+  word-wrap: break-word;
 }
 
+/* User messages */
 .user-message {
-  background-color: #66fcf1;
+  background-color: #66fcf1; /* bright teal */
   color: #0b0c10;
   font-weight: bold;
   text-align: left;
+  border-left: 3px solid #ff6f3c; /* subtle orange accent */
 }
 
+/* GPT messages */
 .gpt-message {
   background-color: #0b0c10;
   border: 1px solid #66fcf1;
   color: #66fcf1;
   text-align: right;
+  box-shadow: 0 0 8px #66fcf133; /* subtle glow */
 }
 
+/* Token / cost info */
 .info-message {
-  color: #a3a3a3;       
+  color: #ff6f3c;       /* orange accent for info */
   font-size: 0.8em;     
   font-style: italic;    
   margin-left: 5px;   
   text-align: right;   
 }
 
+/* Default / error messages */
 .default-message {
   color: #ff0000;       
   font-size: 0.8em;     
   font-style: italic;    
   margin-left: 5px;      
-  text-align: right;
+  text-align: center;
+}
+
+/* Input field */
+#user-input {
+  border: 2px solid #45a29e;
+  border-radius: 5px;
+  background-color: #1f2833;
+  color: #c5c6c7;
+  padding: 8px;
+  font-family: 'Courier New', monospace;
+  width: 70%;
+}
+
+/* Send button */
+button {
+  background-color: #45a29e;
+  border: none;
+  color: #0b0c10;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+button:hover {
+  box-shadow: 0 0 10px #ff6f3c;
+  background-color: #66fcf1; /* slight teal accent on hover */
+}
+
+/* Scrollbar styling */
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background: #1f2833;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background-color: #45a29e;
+  border-radius: 4px;
 }
