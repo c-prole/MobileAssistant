@@ -26,7 +26,7 @@ chatForm.addEventListener("submit", async (e) => {
   const message = userInput.value.trim();
   if (!message) return;
 
-  appendMessage("You", message);
+  appendMessage("user", message);
   userInput.value = "";
 
   try {
@@ -44,7 +44,7 @@ chatForm.addEventListener("submit", async (e) => {
 
     if (data.usage?.total_tokens) {
       const cost = (data.usage.total_tokens / 1000) * tokenCostPerThousand;
-      appendMessage(`~${data.usage.total_tokens} tokens (~$${cost.toFixed(4)})`, "gpt");
+      appendMessage(`~${data.usage.total_tokens} tokens (~$${cost.toFixed(4)})`, "GPT:");
     }
 
     appendMessage("GPT", gptMessage);
