@@ -7,10 +7,6 @@ function appendMessage(sender, message) {
   const messageEl = document.createElement("div");
   messageEl.classList.add("chat-message");
 
-  // Main message text
-  const messageText = document.createElement("div");
-  messageText.textContent = message;
-
   if (sender === "user") {
     messageEl.classList.add("user-message");
   } else if (sender === "gpt") {
@@ -21,26 +17,26 @@ function appendMessage(sender, message) {
     messageEl.classList.add("default-message");
   }
 
-  // Timestamp line
-  const timestamp = document.createElement("div");
-  timestamp.classList.add("message-timestamp");
-  timestamp.textContent = new Date().toLocaleString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    fractionalSecondDigits: 3 // milliseconds
+  // Main message text
+  const textEl = document.createElement("div");
+  textEl.textContent = message;
+
+  // Timestamp
+  const timestampEl = document.createElement("div");
+  timestampEl.classList.add("timestamp");
+  timestampEl.textContent = new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit"
   });
 
-  // Append text and timestamp
-  messageEl.appendChild(messageText);
-  messageEl.appendChild(timestamp);
+  // Append message and timestamp
+  messageEl.appendChild(textEl);
+  messageEl.appendChild(timestampEl);
 
   chatBox.appendChild(messageEl);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
 
 async function typeGPTMessage(message) {
   const messageEl = document.createElement("div");

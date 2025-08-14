@@ -134,8 +134,21 @@ button:hover {
   font-size: 0.85em;       /* smaller than date */
 }
 
-.message-timestamp {
+.timestamp {
+  display: block;
   font-size: 0.7em;
-  color: rgba(255, 255, 255, 0.5); /* faint white */
+  opacity: 0.7;
   margin-top: 2px;
+}
+
+.user-message .timestamp {
+  color: #ff9800; /* orange accent for user timestamps */
+}
+
+.gpt-message .timestamp {
+  color: #00bcd4; /* teal for GPT timestamps */
+}
+
+.info-message .timestamp {
+  color: #ccc; /* neutral grey for info messages */
 }
