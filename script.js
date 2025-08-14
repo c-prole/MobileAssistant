@@ -41,7 +41,6 @@ chatForm.addEventListener("submit", async (e) => {
     const tokenCostPerThousand = 0.003; // GPT-4o-mini rate in USD per 1k tokens
 
     const gptMessage = data.choices[0].message.content;
-    appendMessage(gptMessage, "gpt");
 
     if (data.usage?.total_tokens) {
       const cost = (data.usage.total_tokens / 1000) * tokenCostPerThousand;
