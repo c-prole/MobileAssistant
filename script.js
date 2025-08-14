@@ -14,11 +14,10 @@ function appendMessage(sender, message) {
     messageEl.classList.add("gpt-message");
   }
 
-  messageEl.textContent = message; // keeps the message text
+  messageEl.textContent = message; 
   chatBox.appendChild(messageEl);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
-
 
 // Handle form submit
 chatForm.addEventListener("submit", async (e) => {
@@ -38,19 +37,19 @@ chatForm.addEventListener("submit", async (e) => {
     });
 
     const data = await res.json();
-    const tokenCostPerThousand = 0.003; // GPT-4o-mini rate in USD per 1k tokens
 
     const gptMessage = data.choices[0].message.content;
+    appendMessage("gpt", gptMessage); // Display GPT response
 
+    // Token usage & cost display
+    const tokenCostPerThousand = 0.003; // GPT-4o-mini rate in USD per 1k tokens
     if (data.usage?.total_tokens) {
       const cost = (data.usage.total_tokens / 1000) * tokenCostPerThousand;
-      appendMessage(`~${data.usage.total_tokens} tokens (~$${cost.toFixed(4)})`, "GPT:");
+      appendMessage("gpt", `~${data.usage.total_tokens} tokens (~$${cost.toFixed(4)})`);
     }
-
-    appendMessage("GPT", gptMessage);
 
   } catch (err) {
     console.error(err);
-    appendMessage("GPT", "Error: Could not reach server.");
+    appendMessage("gpt", "Error: Could not reach server.");
   }
 });
