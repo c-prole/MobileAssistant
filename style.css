@@ -31,12 +31,28 @@ h1 {
   background-color: #66fcf1;
   color: #0b0c10;
   font-weight: bold;
-  text-align: right;
+  text-align: left;
 }
 
 .gpt-message {
   background-color: #0b0c10;
   border: 1px solid #66fcf1;
   color: #66fcf1;
-  text-align: left;
+  text-align: right;
+}
+
+.info-message {
+  color: #a3a3a3;       
+  font-size: 0.8em;     
+  font-style: italic;    
+  margin-left: 5px;   
+  text-align: right;   
+}
+
+.default-message {
+  color: #ff0000;       
+  font-size: 0.8em;     
+  font-style: italic;    
+  margin-left: 5px;      
+  text-align: right;
 }

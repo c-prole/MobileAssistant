@@ -7,14 +7,16 @@ function appendMessage(sender, message) {
   const messageEl = document.createElement("div");
   messageEl.classList.add("chat-message");
 
-  // Add user vs GPT styling
   if (sender === "user") {
     messageEl.classList.add("user-message");
-  } else {
+  } else if (sender === "gpt") {
     messageEl.classList.add("gpt-message");
-  }
+  } else if (sender === "info") {
+    messageEl.classList.add("info-message");
+  } else
+    messageEl.classList.add("default-message");
 
-  messageEl.textContent = message; 
+  messageEl.textContent = message;
   chatBox.appendChild(messageEl);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
@@ -45,7 +47,7 @@ chatForm.addEventListener("submit", async (e) => {
     const tokenCostPerThousand = 0.003; // GPT-4o-mini rate in USD per 1k tokens
     if (data.usage?.total_tokens) {
       const cost = (data.usage.total_tokens / 1000) * tokenCostPerThousand;
-      appendMessage("gpt", `~${data.usage.total_tokens} tokens (~$${cost.toFixed(4)})`);
+      appendMessage("info", `~${data.usage.total_tokens} tokens (~$${cost.toFixed(4)})`);
     }
 
   } catch (err) {
