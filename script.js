@@ -5,12 +5,20 @@ const userInput = document.getElementById("user-input");
 // Append a message to the chat box
 function appendMessage(sender, message) {
   const messageEl = document.createElement("div");
-  messageEl.classList.add("message");
-  messageEl.classList.add(sender);
-  messageEl.textContent = `${sender}: ${message}`;
+  messageEl.classList.add("chat-message");
+
+  // Add user vs GPT styling
+  if (sender === "user") {
+    messageEl.classList.add("user-message");
+  } else {
+    messageEl.classList.add("gpt-message");
+  }
+
+  messageEl.textContent = message; // keeps the message text
   chatBox.appendChild(messageEl);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
 
 // Handle form submit
 chatForm.addEventListener("submit", async (e) => {
@@ -30,7 +38,15 @@ chatForm.addEventListener("submit", async (e) => {
     });
 
     const data = await res.json();
-    const gptMessage = data.choices?.[0]?.message?.content || "No response";
+    const tokenCostPerThousand = 0.003; // GPT-4o-mini rate in USD per 1k tokens
+
+    const gptMessage = data.choices[0].message.content;
+    appendMessage(gptMessage, "gpt");
+
+    if (data.usage?.total_tokens) {
+      const cost = (data.usage.total_tokens / 1000) * tokenCostPerThousand;
+      appendMessage(`~${data.usage.total_tokens} tokens (~$${cost.toFixed(4)})`, "gpt");
+    }
 
     appendMessage("GPT", gptMessage);
 
