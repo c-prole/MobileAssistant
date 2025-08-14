@@ -35,29 +35,6 @@ async function typeGPTMessage(message) {
   }
 }
 
-function updateClock() {
-  const clockEl = document.getElementById("clock");
-  const now = new Date();
-
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
-
-  const dateStr = `${year}-${month}-${day}`;
-  const timeStr = `${hours}:${minutes}:${seconds}.${milliseconds}`;
-
-  clockEl.innerHTML = `<span class="date">${dateStr}</span><br><span class="time">${timeStr}</span>`;
-}
-
-// Update every millisecond
-setInterval(updateClock, 1);
-updateClock(); // initial call
-
 // Handle form submit
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -91,4 +68,28 @@ chatForm.addEventListener("submit", async (e) => {
     console.error(err);
     appendMessage("gpt", "Error: Could not reach server.");
   }
+
+
+function updateClock() {
+  const clockEl = document.getElementById("clock");
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+  const dateStr = `${year}-${month}-${day}`;
+  const timeStr = `${hours}:${minutes}:${seconds}.${milliseconds}`;
+
+  clockEl.innerHTML = `<span class="date">${dateStr}</span><br><span class="time">${timeStr}</span>`;
+}
+
+// Update every millisecond
+setInterval(updateClock, 1);
+updateClock(); // initial call
 });
