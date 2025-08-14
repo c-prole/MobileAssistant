@@ -1,6 +1,8 @@
 body {
-  background-color: #0b0c10; /* dark console background */
-  color: #c5c6c7; /* light gray text */
+  background-color: #0b0c10;
+  /* dark console background */
+  color: #c5c6c7;
+  /* light gray text */
   font-family: 'Courier New', monospace;
   margin: 0;
   padding: 20px;
@@ -32,11 +34,13 @@ h1 {
 
 /* User messages */
 .user-message {
-  background-color: #66fcf1; /* bright teal */
+  background-color: #66fcf1;
+  /* bright teal */
   color: #0b0c10;
   font-weight: bold;
   text-align: left;
-  border-left: 3px solid #ff6f3c; /* subtle orange accent */
+  border-left: 3px solid #ff6f3c;
+  /* subtle orange accent */
 }
 
 /* GPT messages */
@@ -45,24 +49,26 @@ h1 {
   border: 1px solid #66fcf1;
   color: #66fcf1;
   text-align: right;
-  box-shadow: 0 0 8px #66fcf133; /* subtle glow */
+  box-shadow: 0 0 8px #66fcf133;
+  /* subtle glow */
 }
 
 /* Token / cost info */
 .info-message {
-  color: #ff6f3c;       /* orange accent for info */
-  font-size: 0.8em;     
-  font-style: italic;    
-  margin-left: 5px;   
-  text-align: right;   
+  color: #ff6f3c;
+  /* orange accent for info */
+  font-size: 0.8em;
+  font-style: italic;
+  margin-left: 5px;
+  text-align: right;
 }
 
 /* Default / error messages */
 .default-message {
-  color: #ff0000;       
-  font-size: 0.8em;     
-  font-style: italic;    
-  margin-left: 5px;      
+  color: #ff0000;
+  font-size: 0.8em;
+  font-style: italic;
+  margin-left: 5px;
   text-align: center;
 }
 
@@ -90,7 +96,8 @@ button {
 
 button:hover {
   box-shadow: 0 0 10px #ff6f3c;
-  background-color: #66fcf1; /* slight teal accent on hover */
+  background-color: #66fcf1;
+  /* slight teal accent on hover */
 }
 
 /* Scrollbar styling */
@@ -105,4 +112,24 @@ button:hover {
 .chat-box::-webkit-scrollbar-thumb {
   background-color: #45a29e;
   border-radius: 4px;
+}
+
+.console-clock {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-family: 'Courier New', monospace;
+  color: #ff6f3c;          /* orange accent */
+  text-align: right;
+  line-height: 1.2em;       /* tighter spacing between lines */
+  text-shadow: 0 0 6px #ff6f3c; /* subtle glow */
+}
+
+.console-clock .date {
+  font-size: 1.1em;        /* slightly larger */
+  font-weight: bold;
+}
+
+.console-clock .time {
+  font-size: 0.85em;       /* smaller than date */
 }
