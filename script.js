@@ -7,16 +7,37 @@ function appendMessage(sender, message) {
   const messageEl = document.createElement("div");
   messageEl.classList.add("chat-message");
 
+  // Main message text
+  const messageText = document.createElement("div");
+  messageText.textContent = message;
+
   if (sender === "user") {
     messageEl.classList.add("user-message");
   } else if (sender === "gpt") {
     messageEl.classList.add("gpt-message");
   } else if (sender === "info") {
     messageEl.classList.add("info-message");
-  } else
+  } else {
     messageEl.classList.add("default-message");
+  }
 
-  messageEl.textContent = message;
+  // Timestamp line
+  const timestamp = document.createElement("div");
+  timestamp.classList.add("message-timestamp");
+  timestamp.textContent = new Date().toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    fractionalSecondDigits: 3 // milliseconds
+  });
+
+  // Append text and timestamp
+  messageEl.appendChild(messageText);
+  messageEl.appendChild(timestamp);
+
   chatBox.appendChild(messageEl);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
@@ -46,7 +67,7 @@ function updateClock() {
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const seconds = String(now.getSeconds()).padStart(2, '0');
-  const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+  const milliseconds = String(now.getMilliseconds()).padStart(1, '0');
 
   const dateStr = `${year}-${month}-${day}`;
   const timeStr = `${hours}:${minutes}:${seconds}.${milliseconds}`;

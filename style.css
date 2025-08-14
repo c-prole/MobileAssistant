@@ -133,3 +133,9 @@ button:hover {
 .console-clock .time {
   font-size: 0.85em;       /* smaller than date */
 }
+
+.message-timestamp {
+  font-size: 0.7em;
+  color: rgba(255, 255, 255, 0.5); /* faint white */
+  margin-top: 2px;
+}
