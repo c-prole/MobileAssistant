@@ -1,50 +1,41 @@
+const chatForm = document.getElementById("chat-form");
+    const chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
 
-
-const form = document.getElementById("chat-form");
-const input = document.getElementById("user-input");
-const chatBox = document.getElementById("chat-box");
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const userMessage = input.value.trim();
-  if (!userMessage) return;
-
-  // Display user message
-  appendMessage("You", userMessage);
-  input.value = "";
-  try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: userMessage }],
-      }),
-    });
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.status}`);
+    // Append a message to the chat box
+    function appendMessage(sender, message) {
+      const messageEl = document.createElement("div");
+      messageEl.classList.add("message");
+      messageEl.classList.add(sender);
+      messageEl.textContent = `${sender}: ${message}`;
+      chatBox.appendChild(messageEl);
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
-    const data = await response.json();
-    const reply = data.choices[0].message.content.trim();
-    appendMessage("GPT", reply);
-  } catch (error) {
-    console.error("Error:", error);
-    appendMessage("GPT", "Sorry, something went wrong.");
-  }
-});
 
-function appendMessage(sender, message) {
-  const msg = document.createElement("p");
-  msg.innerHTML = `<strong>${sender}:</strong> ${message}`;
-  chatBox.appendChild(msg);
-  chatBox.scrollTop = chatBox.scrollHeight;
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    console.log("Form submitted");
-  });
-}
+    // Handle form submit
+    chatForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      appendMessage("You", message);
+      userInput.value = "";
+
+      try {
+        // Call backend server
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: [{ role: "user", content: message }] })
+        });
+
+        const data = await res.json();
+        const gptMessage = data.choices?.[0]?.message?.content || "No response";
+
+        appendMessage("GPT", gptMessage);
+
+      } catch (err) {
+        console.error(err);
+        appendMessage("GPT", "Error: Could not reach server.");
+      }
+    });
